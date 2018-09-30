@@ -33,9 +33,10 @@ You will develop an application that provides a list of items within a variety o
 - Run `vagrant provision` to install the necessary dependencies.
 - Run `vagrant ssh` to terminal into the virtual machine.
 - Run cd .. (2 times)
+- Cd into vagrant
+- \*if first time running, you must add a category before adding an item by using the `python3 lotsOfCategories.py` script
 - Run application with `python3 views.py` from within its directory
 - go to `http://localhost:8000/categories` to access the application
-- \*if first time running, you must add a category before adding an item by using the `lotsOfCategories.py` script
 
 #### CRUD for categories
 
