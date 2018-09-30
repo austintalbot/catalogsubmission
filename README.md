@@ -27,18 +27,17 @@ You will develop an application that provides a list of items within a variety o
 ## Getting Started
 
 - Install Vagrant and VirtualBox
-- Clone this repo into the `catlog/` directory found in the Vagrant directory
+- Clone this repo using command `git clone https://github.com/austintalbot/catalogsubmission.git`
+- cd into catalogsubmission
 - Run `vagrant up` to run the virtual machine, then `vagrant ssh` to login to the VM
-- from the main directory run `sudo pip install -r requirements`
-- run application with `python3 views.py` from within its directory
+- Run `vagrant provision` to install the necessary dependencies.
+- Run `vagrant ssh` to terminal into the virtual machine.
+- Run cd .. (2 times)
+- Run application with `python3 views.py` from within its directory
 - go to `http://localhost:8000/categories` to access the application
 - \*if first time running, you must add a category before adding an item by using the `lotsOfCategories.py` script
 
-#### --------------------------------------
-
 #### CRUD for categories
-
-#### --------------------------------------
 
 `/sitemap` - quick list of all of the crud operations and a link to the JSON endpoints.
 
@@ -62,11 +61,7 @@ You will develop an application that provides a list of items within a variety o
 
 `/categories/<int:category_id>/item/<int:catalog_item_id>/delete` - Allows user to delete an item (login required)
 
-#### --------------------------------------
-
 #### Login
-
-#### --------------------------------------
 
 `/login` - login page
 

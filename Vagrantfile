@@ -28,7 +28,7 @@ config.vm.box = "generic/ubuntu1804"
   apt-get -qqy install python3 python3-pip
   pip3 install --upgrade pip
   pip3 install flask packaging oauth2client redis passlib flask-httpauth
-  pip3 install sqlalchemy flask-sqlalchemy psycopg2-binary bleach requests prettyTable
+  pip3 install sqlalchemy flask-sqlalchemy psycopg2-binary bleach requests prettyTable sqlalchemy_utils
   apt-get -qqy install python python-pip
   pip2 install --upgrade pip
   pip2 install flask packaging oauth2client redis passlib flask-httpauth
