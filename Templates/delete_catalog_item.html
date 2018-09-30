@@ -1,0 +1,25 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+
+<section class="hero is-small is-warning is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <form action="#" method="post">
+                    <h5>Are you sure you want to delete {{CatalogItem.name}}?</h5>
+                    <br>
+                    <button type="submit" class="button is-danger " id="submit" type="submit">Delete</button>
+                </form>
+                <button class="button is-text">
+                    <a href="{{url_for('showCatalogItem', category_id = CatalogItem.category_id ,item_id = CatalogItem.id )}}">cancel</a>
+                </button>
+            </h1>
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

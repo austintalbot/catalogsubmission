@@ -1,0 +1,30 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "flash_alert.html" %}
+
+{% include "category_panel.html" %}
+
+<!-- hero section to display the category and number of items-->
+<section class="hero is-small ">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <h2>{{ category.name }} Items ({{ quantity }} items)</h2>
+            </h1>
+        </div>
+    </div>
+</section>
+{% if session.user_id %}
+<div>
+    <a href="{{ url_for('newCatalogItem') }}">
+        <button class="button is-primary">Add Item</button>
+    </a>
+</div>
+{% endif %}
+<div>
+    <!-- list of the items in the catalog-->
+    {% include "catalog_list.html" %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+<section class="hero is-small is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <h5>full showCatalogJSON API access</h5>
+                <button class="button is-text">
+                    <a href="{{url_for('categoriesJSON')}}">Show full catalog Json</a>
+                </button>
+                <button class="button is-text">
+                    <a href="{{url_for('UsersJSON')}}">Show Users Json</a>
+                </button>
+
+            </h1>
+
+        </div>
+    </div>
+</section>
+
+<section class="hero is-small is-dark is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <h5>Categories API access</h5>
+                <button class="button is-text">
+                    <a href="{{url_for('showCatalogJSON')}}">Show Categories Json</a>
+                </button>
+            </h1>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-small is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                <h5>Item API access</h5>
+                {% for c in categories %}
+                {% for i in items %}
+                {% if c.id == i.category_id %}
+                <div>
+
+                    <button class="button is-text">
+                        <a href="{{ url_for('showCatalogItemJSON', category_id=i.category_id, item_id=i.id) }}">
+                            <h3> {{c.name}} - {{i.name}} </h3>
+                        </a>
+                    </button>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+
+            </h1>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}}

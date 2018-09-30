@@ -1,0 +1,22 @@
+<nav class="navbar " role="navigation" aria-label="main navigation">
+	<div class="navbar">
+		<div class="navbar-brand">
+			<a class="navbar-item " href="{{url_for('showCatalog')}}">
+				<img src="{{url_for('static', filename='stripes.png')}}" alt="car" width="151" height="75">
+			</a>
+			<!-- navbar items, navbar burger... -->
+			<a class="navbar-item " href="{{url_for('showCatalog')}}"> catalog home</a>
+			{%if 'username' not in session %}
+			<a class="navbar-item " href="{{url_for('login')}}">Click Here to Login </a>
+			{% else %}
+			<a class="navbar-item " href="{{url_for('disconnect')}}">Logout </a>
+			{% endif %}
+
+		</div>
+		<div class="navbar-menu">
+			<!-- navbar start, navbar end -->
+		</div>
+
+
+	</div>
+</nav>

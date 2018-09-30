@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+{% include "flash_alert.html" %}
+
+
+<section class="hero is-small is-primary ">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                {{item.name}}<small>({{ item.category.name }})</small>
+            </h1>
+            <h2 class="subtitle">
+                ${{item.price}}
+            </h2>
+            <h3>
+                {{ item.description }}
+            </h3>
+        </div>
+
+        {% if item.user_id == session.user_id %}
+        <br>
+        <div>
+            <a href="{{ url_for('editCatalogItem', category_id=item.category_id, item_id=item.id) }}">
+                <button class="button is-link">
+                    Edit
+                </button>
+            </a>
+            <a href="{{ url_for('deleteCatalogItem', category_id=item.category_id, item_id=item.id) }}">
+                <button class="button is-danger ">
+                    Delete
+                </button>
+            </a>
+        </div>
+        {% endif %}
+        {% if creator %}
+        <div class="creator img">
+            Created By: {{ creator.email }} <img src="{{ creator.picture }}" alt="creator image" style="height: 100px;" />
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+
+
+{% endblock %}

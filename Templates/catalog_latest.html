@@ -1,0 +1,14 @@
+<!-- latest list for logged in users -->
+
+<section class="hero is-small is-primary ">
+    <div class="hero-body">
+        <h2 class="title">Latest Items</h2>
+        {% for late in latest %}
+        <ul>
+            <a class="is-small" href="{{ url_for('showCatalogItem', category_id=late.category_id, item_id=late.id) }}">
+                <li>{{late.name}} ({{late.category}})</li>
+            </a>
+        </ul>
+        {% endfor %}
+    </div>
+</section>

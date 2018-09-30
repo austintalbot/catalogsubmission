@@ -1,0 +1,41 @@
+<!-- list of the items in the catalog-->
+<ul>
+    {% if items and quantity > 0 %}
+    {% for i in items %}
+    <li>
+        <div class="box">
+            <div>
+                <span>
+                    <a href="{{ url_for('showCatalogItem', category_id=i.category_id, item_id=i.id) }}">
+                        <h3>{{i.name}} </h3>
+                    </a>
+                    {% if i.user_id == session.user_id %}
+                    <div>
+                        <a href="{{ url_for('editCatalogItem', category_id=i.category_id, item_id=i.id) }}">
+                            <button class="button is-primary">Edit</button>
+                        </a>
+                        <a href="{{ url_for('deleteCatalogItem', category_id=i.category_id, item_id=i.id) }}">
+                            <button class="button is-danger ">Delete
+                            </button>
+                        </a>
+                    </div>
+                    {% endif %}
+
+                </span>
+                {% if creator %}
+                <div>
+                    Created By: {{ creator.email }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+    {% else %}
+    <ul>
+        <li>
+            You currently have no menu items.
+        </li>
+    </ul>
+    {% endif %}
+</ul>

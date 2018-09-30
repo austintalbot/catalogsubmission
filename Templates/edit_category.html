@@ -1,0 +1,41 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<section class="hero is-small is-link is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Edit Category
+            </h1>
+            <h2 class="subtitle">
+                {{category.name}}
+            </h2>
+        </div>
+    </div>
+</section>
+<div>
+    <form action="{{ url_for('editCategory',category_id = category.id)}}" method="post">
+        <div>
+            <!-- name -->
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" name="name" value="{{category.name}}">
+                </div>
+            </div>
+
+
+            <!-- submit button -->
+            <div class="control">
+                <button class="button is-link">Update</button>
+            </div>
+
+        </div>
+    </form>
+    <!-- Cancel button -->
+    <div class="control">
+        <button class="button is-text"><a href="{{ url_for('showCatalog')}}">Cancel</a></button>
+    </div>
+</div>
+{% endblock %}

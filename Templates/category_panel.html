@@ -1,0 +1,35 @@
+<!-- Panel to display high level categories-->
+
+{% if session.user_id %}
+<div>
+    <a href="{{ url_for('newCategory') }}">
+        <button class="button is-link ">Create New Category</button>
+    </a>
+    <a href="{{ url_for('newCatalogItem') }}">
+        <button class="button is-primary">Add Item</button>
+    </a>
+</div>
+{% endif %}
+<div>
+    <h2>Categories</h1>
+
+
+        {% for c in categories %}
+        <section class="section is-paddingless">
+            <div class="column box">
+                <a href="{{ url_for('showCategoryItems', category_id=c.id) }}">{{ c.name }}</a>
+                {% if c.user_id == session.user_id %}
+                <div>
+                    <a href="{{ url_for('editCategory', category_id=c.id, item_id=c.id) }}">
+                        <button class="button is-primary"> Edit</button>
+                    </a>
+                    <a href="{{ url_for('deleteCategory', category_id=c.id, item_id=c.id) }}">
+                        <button class="button is-danger"> Delete</button>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        {% endfor %}
+
+</div>
