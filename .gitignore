@@ -103,6 +103,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 /.vagrant
-/static/client_secrets.json
-/static/facebook_secret.json
 /Catalog.db
