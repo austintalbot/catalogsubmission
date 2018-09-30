@@ -29,10 +29,10 @@ You will develop an application that provides a list of items within a variety o
 - Install Vagrant and VirtualBox
 - Clone this repo using command `git clone https://github.com/austintalbot/catalogsubmission.git`
 - cd into catalogsubmission
-- Run `vagrant up` to run the virtual machine, then `vagrant ssh` to login to the VM
+- Run `vagrant up` to run the virtual machine
 - Run `vagrant provision` to install the necessary dependencies.
 - Run `vagrant ssh` to terminal into the virtual machine.
-- Run cd .. (2 times)
+- Run `cd ..` (2 times)
 - Cd into vagrant
 - \*if first time running, you must add a category before adding an item by using the `python3 lotsOfCategories.py` script
 - Run application with `python3 views.py` from within its directory
