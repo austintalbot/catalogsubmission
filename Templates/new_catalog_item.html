@@ -20,14 +20,14 @@
 			<div class="field">
 				<label class="label">Name</label>
 				<div class="control">
-					<input class="input" type="text" name="name">
+					<input class="input" type="text" name="name" required>
 				</div>
 			</div>
 			<!-- price -->
 			<div class="field">
 				<label class="label">Price</label>
 				<div class="control has-icons-left">
-					<input class="input" type="text" maxlength="10" name="price">
+					<input class="input" type="text" maxlength="10" name="price" required>
 					<span class="icon is-small is-left">
 						<i class="fas fa-dollar-sign"></i>
 					</span>
@@ -37,7 +37,7 @@
 			<div class="field">
 				<label class="label">Description</label>
 				<div class="control">
-					<textarea class="textarea" maxlength="250" rows="3" name="description"></textarea>
+					<textarea class="textarea" maxlength="250" rows="3" name="description" required></textarea>
 				</div>
 			</div>
 			<!-- category select -->
@@ -60,14 +60,14 @@
 			<div class="field is-grouped">
 				<!-- submit button -->
 				<div class="control">
-					<button class="button is-link">Create</button>
-				</div>
-				<!-- Cancel button -->
-				<div class="control">
-					<button class="button is-text"><a href="{{ url_for('showCatalog')}}">Cancel</a></button>
+					<button type="submit" class="button is-link">Create</button>
 				</div>
 			</div>
 		</form>
+		<!-- Cancel button -->
+		<div class="control">
+			<button class="button is-text"><a href="{{ url_for('showCatalog')}}">Cancel</a></button>
+		</div>
 	</div>
 </div>
 

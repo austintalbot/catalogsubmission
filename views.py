@@ -1,5 +1,6 @@
 from functools import wraps
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, make_response  # noqa
+from flask import (Flask, render_template, request, redirect, jsonify, url_for,
+                   flash, make_response)
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import relationship, sessionmaker
 from collections import deque
@@ -7,7 +8,11 @@ from database_setup import Base, CategoryItem, Category, User
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
-import random, string, json, httplib2, requests
+import random
+import string
+import json
+import httplib2
+import requests
 from flask_httpauth import HTTPBasicAuth
 from oauth2client.client import flow_from_clientsecrets, FlowExchangeError
 
@@ -48,8 +53,12 @@ class itemlist(object):
         return hash((self.name, self.id, self.category_id, self.creator))
 
     def __eq__(self, other):
-        if not isinstance(other, type(self)): return NotImplemented
-        return self.name == other.name and self.id == other.id and self.category_id == other.category_id and self.creator == other.creator
+        if not isinstance(other, type(self)):
+            return NotImplemented
+        return self.name == other.name and \
+            self.id == other.id and \
+            self.category_id == other.category_id and \
+            self.creator == other.creator
 
     def __iter__(self):
         return self
@@ -64,12 +73,15 @@ class itemlist(object):
 
 # function to capture last five items viewed
 def latest(items):
+    dbitems = session.query(CategoryItem).all()
     if items not in latestlist:
         if len(latestlist) > 4:
             del latestlist[0]
             latestlist.append(items)
         else:
             latestlist.append(items)
+    elif items not in dbitems:
+        latestlist.remove(items)
 
 
 # Login required decorator
@@ -165,10 +177,10 @@ def showCatalog():
 @login_required
 def newCategory():
     """Allows user to create new category"""
+    if 'user_id' not in login_session and 'email' in login_session:
+        login_session['user_id'] = getUserID(login_session['email'])
     if request.method == 'POST':
         print(login_session)
-        if 'user_id' not in login_session and 'email' in login_session:
-            login_session['user_id'] = getUserID(login_session['email'])
         newCategory = Category(
             name=request.form['name'], user_id=login_session['user_id'])
         session.add(newCategory)
@@ -186,7 +198,12 @@ def editCategory(category_id):
     """Allows user to edit an existing category"""
     editedCategory = session.query(Category).filter_by(id=category_id).one()
     if editedCategory.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized!')}</script><body onload='myFunction()'>"  # noqa
+        return """<script>
+                    function myFunction() {
+                        alert('You are not authorized!')
+                        }
+                </script>
+                <body onload='myFunction()'>"""
     if request.method == 'POST':
         if request.form['name']:
             editedCategory.name = request.form['name']
@@ -204,7 +221,12 @@ def deleteCategory(category_id):
     """Allows user to delete an existing category"""
     categoryToDelete = session.query(Category).filter_by(id=category_id).one()
     if categoryToDelete.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized!')}</script><body onload='myFunction()'>"  # noqa
+        return """<script>
+                         function myFunction() {
+                            alert('You are not authorized!')
+                        }
+                    </script>
+                <body onload='myFunction()'>"""
     if request.method == 'POST':
         session.delete(categoryToDelete)
         flash('%s Successfully Deleted' % categoryToDelete.name, 'success')
@@ -289,7 +311,12 @@ def editCatalogItem(category_id, item_id):
     """return "This page will be for making a updating catalog item" """
     editedItem = session.query(CategoryItem).filter_by(id=item_id).one()
     if editedItem.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized!')}</script><body onload='myFunction()'>"  # noqa
+        return """<script>
+                    function myFunction() {
+                    alert('You are not authorized!')
+                }
+            </script>
+        <body onload='myFunction()'>"""
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -318,7 +345,12 @@ def deleteCatalogItem(category_id, item_id):
     """return "This page will be for deleting a catalog item" """
     itemToDelete = session.query(CategoryItem).filter_by(id=item_id).one()
     if itemToDelete.user_id != login_session['user_id']:
-        return "<script>function myFunction() {alert('You are not authorized!')}</script><body onload='myFunction()'>"  # noqa
+        return """<script>
+                         function myFunction() {
+                            alert('You are not authorized!')
+                        }
+                    </script>
+                <body onload='myFunction()'>"""
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()
