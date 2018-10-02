@@ -80,7 +80,7 @@ def latest(items):
             latestlist.append(items)
         else:
             latestlist.append(items)
-    elif items not in dbitems:
+    if items not in dbitems:
         latestlist.remove(items)
 
 
