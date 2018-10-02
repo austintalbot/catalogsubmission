@@ -73,18 +73,17 @@ class itemlist(object):
 
 # function to capture last five items viewed
 def latest(items):
-    dbitems = session.query(CategoryItem).all()
     if items not in latestlist:
         if len(latestlist) > 4:
             del latestlist[0]
             latestlist.append(items)
         else:
             latestlist.append(items)
-    if items not in dbitems:
-        latestlist.remove(items)
 
 
 # Login required decorator
+
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -270,7 +269,6 @@ def showCatalogItem(category_id, item_id):
     i = itemlist(item.name, item.id, category_id, category.name, creator)
     print(i.name)
     print(i.id)
-    print(i.creator)
     print(i.category_id)
     print(i.category)
     latest(i)
