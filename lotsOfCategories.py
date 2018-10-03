@@ -26,8 +26,8 @@ session = DBSession()
 user1 = User(
     name="Austin Talbot",
     email="austintalbot@gmail.com",
-    picture=
-    'https://lh5.googleusercontent.com/-E-fRbWcd9eI/AAAAAAAAAAI/AAAAAAAABbE/IdjWqud_cWo/photo.jpg'
+    picture="""https://lh5.googleusercontent.com/
+    -E-fRbWcd9eI/AAAAAAAAAAI/AAAAAAAABbE/IdjWqud_cWo/photo.jpg"""
 )
 session.add(user1)
 session.commit()

@@ -82,8 +82,6 @@ def latest(items):
 
 
 # Login required decorator
-
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -393,12 +391,15 @@ def fbconnect():
     app_secret = json.loads(open('./static/facebook_secret.json',
                                  'r').read())['web']['app_secret']
 
-    url = 'https://graph.facebook.com/v3.1/oauth/access_token?client_id=%s&redirect_uri=%s&client_secret=%s&code=%s' % (
+    url = """https://graph.facebook.com/v3.1/oauth/
+            access_token?client_id=%s
+            &redirect_uri=%s&client_secret=%s&code=%s""" % (
         app_id, 'https://localhost:5000', app_secret, access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
-    url = 'https://graph.facebook.com/v2.8/me?access_token=%s&fields=name,id,email' % access_token
+    url = """https://graph.facebook.com/
+            v2.8/me?access_token=%s&fields=name,id,email""" % access_token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     result = result.decode().split("'")[0]
@@ -415,7 +416,8 @@ def fbconnect():
     login_session['access_token'] = access_token
 
     # Get user picture
-    url = 'https://graph.facebook.com/v3.1/%s/picture?access_token=%s&redirect=0&height=200&width=200' % (
+    url = """https://graph.facebook.com/v3.1/
+             %s/picture?access_token=%s&redirect=0&height=200&width=200""" % (
         data["id"], login_session['access_token'])
 
     h = httplib2.Http()
@@ -546,8 +548,8 @@ def gdisconnect():
             json.dumps('Current user not connected.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session[
-        'access_token']
+    url = """https://accounts.google.com/o/oauth2/
+    revoke?token=%s""" % login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
 
